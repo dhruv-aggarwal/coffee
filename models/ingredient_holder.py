@@ -29,11 +29,13 @@ class IngredientHolder():
     def __gt__(self, holder2):
         return self.quantity > holder2.quantity
 
+    ## To subtract the quantity
     def subtract(self, holder2):
         with self.lock:
             if self.__gt__(holder2):
                 self.quantity = self.quantity - holder2.quantity
 
+    ## To add the quantity
     def load(self, quantity):
         with self.lock:
             if quantity > 0:
