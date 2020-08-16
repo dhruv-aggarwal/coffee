@@ -20,8 +20,6 @@ class Machine():
     ######################## init methods start ######################
     def load_ingredients(self, ingredient_quantity_map):
         ingredient_map = {}
-        # print(ingredient_quantity_map)
-
         for ingr in ingredient_quantity_map:
             if ingr not in Ingredient.get_values():
                 raise InvalidIngredientException(ingr, Ingredient.get_values())
@@ -100,6 +98,7 @@ class Machine():
                 unit=None
             )
         else:
+            ## Added lock to make edits thread safe
             with self.lock:
                 self.ingredient_map[ingredient_type].load(quantity)
 
@@ -116,6 +115,7 @@ class Machine():
         diff = set(beverage_obj.preparation_details.keys()).difference(set(self.ingredient_map.keys()))
         if diff:
             raise UnavailableIngredientException(beverage_obj.beverage_type, list(diff)[0])
+        ## Added lock to make edits thread safe
         with self.lock:
             for ingr in beverage_obj.preparation_details:
                 if self.ingredient_map.get(ingr) < beverage_obj.preparation_details.get(ingr):

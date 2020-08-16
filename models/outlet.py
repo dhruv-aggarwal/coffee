@@ -21,6 +21,7 @@ class Outlet():
             raise InvalidOutletException(self.id)
         return True
 
+    ## Added lock to make edits thread safe
     def start(self):
         with self.lock:
             if not self.status():

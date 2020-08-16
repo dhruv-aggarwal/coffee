@@ -30,12 +30,14 @@ class IngredientHolder():
         return self.quantity > holder2.quantity
 
     ## To subtract the quantity
+    ## Added lock to make edits thread safe
     def subtract(self, holder2):
         with self.lock:
             if self.__gt__(holder2):
                 self.quantity = self.quantity - holder2.quantity
 
     ## To add the quantity
+    ## Added lock to make edits thread safe
     def load(self, quantity):
         with self.lock:
             if quantity > 0:
