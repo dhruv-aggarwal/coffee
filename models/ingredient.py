@@ -1,5 +1,8 @@
 from enum import Enum
 
+'''
+Enum for the names of the allowed ingredients
+'''
 class Ingredient(Enum):
     HOT_WATER = "hot_water"
     HOT_MILK = "hot_milk"

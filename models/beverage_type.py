@@ -1,5 +1,8 @@
 from enum import Enum
 
+'''
+Enum for the name of the beverages that the machines can prepare
+'''
 class BeverageType(Enum):
     HOT_TEA = "hot_tea"
     HOT_COFFEE = "hot_coffee"
